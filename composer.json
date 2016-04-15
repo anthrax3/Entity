@@ -1,0 +1,27 @@
+{
+    "name": "ramon_barros/Entity",
+    "description": "Entidade comuns.",
+    "type": "git",
+    "version": "1.0.0",
+    "require": {
+        "php": " >= 5.3.7",
+        "phpunit/phpunit": "~4.0",
+        "illuminate/container": "4.0.x"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ramon Barros",
+            "email": "contato@ramon-barros.com"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
