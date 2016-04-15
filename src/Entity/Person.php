@@ -32,7 +32,7 @@ class Person
     public $natural;
     public $juridical;
 
-    public function __construct($doc=null)
+    public function __construct($doc = null)
     {
         try {
             if (is_null($doc)) {
@@ -53,26 +53,28 @@ class Person
                  * Insere o tipo de pessoa na classe Pessoa.
                  */
                 $this->natural = new Natural();
+                $this->natural->setPrimaryDocLength(11);
 
                 /**
                  * Insere o documento CPF
                  * @var mixed se o retorno for uma instancia de Pessoa Fisica continua
                  * caso contrário mostra o erro.
                  */
-                $this->natural->setCpf($doc);
+                $this->natural->setPrimaryDoc($doc);
                 $this->type = $this->natural->getType();
             } elseif (strlen($doc)==14) {
                 /**
                  * Insere o tipo de pessoa na classe Pessoa.
                  */
                 $this->juridical = new Juridical();
+                $this->juridical->setPrimaryDocLength(14);
 
                 /**
                  * Insere o documento CNPJ
                  * @var mixed se o retorno for uma instancia de Pessoa Juridica continua
                  * caso contrário mostra o erro.
                  */
-                $this->juridical->setCnpj($doc);
+                $this->juridical->setPrimaryDoc($doc);
                 $this->type = $this->juridical->getType();
             } else {
                 throw new Exception('Documento n&acirc;o identificado.');
@@ -90,13 +92,12 @@ class Person
 
     public function setMask($mask = false)
     {
-        $instance = null;
         if ($this->type ==1) {
-            $instance = $this->natural->setMask($mask);
+            $this->natural->setMask($mask);
         } elseif ($this->type == 2) {
-            $instance = $this->juridical->setMask($mask);
+            $this->juridical->setMask($mask);
         }
-        return $instance;
+        return $this;
     }
 
     public function getError()
@@ -126,27 +127,13 @@ class Person
         return $name;
     }
 
-    public function getDoc1($mask = false)
+    public function getPrimaryDoc()
     {
-        $doc1 = null;
-        if ($this->type == 1) {
-            $mask = !$mask ? $this->natural->getMask() : $mask;
-            $doc1 = $this->natural->setMask($mask)->getCpf();
-        } elseif ($this->type == 2) {
-            $mask = !$mask ? $this->juridical->getMask() : $mask;
-            $doc1 = $this->juridical->setMask($mask)->getCnpj();
-        }
-        return $doc1;
+        return $this->{$this->getType()}->getPrimaryDoc();
     }
 
-    public function getDoc2()
+    public function getSecundaryDoc()
     {
-        $doc2 = null;
-        if ($this->type == 1) {
-            $doc2 = $this->natural->getRg();
-        } elseif ($this->type == 2) {
-            $doc2 = $this->juridical->getIe();
-        }
-        return $doc2;
+        return $this->{$this->getType()}->getSecundaryDoc();
     }
 }

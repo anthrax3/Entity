@@ -1,7 +1,8 @@
 <?php namespace Entity\Person;
 
 use Entity\Person\AbstractPerson;
-use Entity\Person\Exceptions\CpfInvalidoException;
+use Entity\Person\Exceptions\PrimaryDocInvalidException;
+use Entity\Person\Exceptions\SecundaryDocInvalidException;
 
 /**
  * Classe para criação da entidade Pessoa Fisica
@@ -16,22 +17,9 @@ class Natural extends AbstractPerson
 
     public function __construct()
     {
-        $this->type = self::FISICA;
+        $this->setType(self::NATURAL);
+        $this->setPrimaryDocLength(11);
         $this->setMask(false);
-    }
-
-    public function setCpf($cpf=null)
-    {
-        try {
-            if ($this->validar_cpf($cpf)) {
-                $this->setDoc1($cpf);
-            } else {
-                throw new CpfInvalidoException();
-            }
-        } catch (CpfInvalidoException $e) {
-            return $e->getMessage();
-        }
-        return $this;
     }
 
     public function setMask($mask=false)
@@ -40,68 +28,80 @@ class Natural extends AbstractPerson
         return $this;
     }
 
+    public function setPrimaryDoc($primaryDoc=null)
+    {
+        try {
+            parent::setPrimaryDoc($primaryDoc);
+            if (!$this->validatePrimaryDoc()) {
+                throw new PrimaryDocInvalidException();
+            }
+        } catch (PrimaryDocInvalidException $e) {
+            return $e->getMessage();
+        }
+        return $this;
+    }
+
+    public function setSecundaryDoc($secundaryDoc=null)
+    {
+        try {
+            parent::setSecundaryDoc($secundaryDoc);
+            if (!$this->validateSecundaryDoc()) {
+                throw new SecundaryDocInvalidException();
+            }
+            return $this;
+        } catch (SecundaryDocInvalidException $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function getMask()
     {
         return $this->mask;
     }
 
-    public function getCpf()
+    public function getPrimaryDoc()
     {
-        $cpf = $this->getDoc1();
-        if ($this->mask) {
-            return preg_replace('/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/', '${1}.${2}.${3}-${4}', $cpf);
+        $primaryDoc = parent::getPrimaryDoc();
+        if ($this->getMask()) {
+            $primaryDoc = preg_replace('/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/', '${1}.${2}.${3}-${4}', $primaryDoc);
         }
-        return $cpf;
+        return $primaryDoc;
     }
-
-    public function setRg($rg=null)
-    {
-        $this->setDoc2($rg);
-        return $this;
-    }
-
-    public function getRg()
-    {
-        return $this->getDoc2();
-    }
-
 
     /**
      * Verifica se é um número de CPF válido.
-     * @param $cpf O número a ser verificado
      * @return boolean
      */
-    public function validar_cpf($cpf)
+    public function validatePrimaryDoc()
     {
-        $cpf = preg_replace('/\D/', '', $cpf);
-
-        if (strlen($cpf) != 11) {
+        if (!parent::validatePrimaryDoc()) {
             return false;
         }
 
-        if (preg_match('/^(\d{1})\1{10}$/', $cpf)) {
+        $primaryDoc = $this->getPrimaryDoc();
+        if (preg_match('/^(\d{1})\1{10}$/', $primaryDoc)) {
             return false;
         }
 
         $sum = 0;
         for ($i = 0; $i < 9; $i++) {
-            $sum += $cpf[$i] * (10-$i);
+            $sum += $primaryDoc[$i] * (10-$i);
         }
         $mod = $sum % 11;
         $digit = ($mod > 1) ? (11 - $mod) : 0;
 
-        if ($cpf[9] != $digit) {
+        if ($primaryDoc[9] != $digit) {
             return false;
         }
 
         $sum = 0;
         for ($i = 0; $i < 10; $i++) {
-            $sum += $cpf[$i] * (11-$i);
+            $sum += $primaryDoc[$i] * (11-$i);
         }
         $mod = $sum % 11;
         $digit = ($mod > 1) ? (11 - $mod) : 0;
 
-        if ($cpf[10] != $digit) {
+        if ($primaryDoc[10] != $digit) {
             return false;
         }
         return true;

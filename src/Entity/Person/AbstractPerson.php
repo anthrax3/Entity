@@ -11,26 +11,59 @@ use \UnexpectedValueException as Argument;
  */
 abstract class AbstractPerson implements PersonInterface
 {
-    protected $doc1;
-    protected $doc2;
+    protected $primaryDocLength;
+    protected $primaryDoc;
+    protected $secundaryDoc;
+    protected $secundaryDocLength;
     protected $name;
     protected $type;
 
-    public function setDoc1($doc1 = null)
+    public function setType($type = null)
     {
-        if (is_null($doc1)) {
-            throw new Argument("Você deve informar um documento.");
+         if (is_null($type)) {
+            throw new Argument("Você deve informar o tipo de pessoa.");
         }
-        $this->doc1 = $this->onlynumber($doc1);
+        if (is_int($type)) {
+            $this->type = $type;
+        } else {
+            throw new UnexpectedValueException( sprintf( 'O valor do tipo deve ser numérico, %s foi dado.' , gettype( $type ) ) );
+        }
         return $this;
     }
 
-    public function setDoc2($doc2 = null)
+    public function setPrimaryDocLength($primaryDocLength = null)
     {
-        if (is_null($doc2)) {
-            throw new Argument("Você deve informar um documento.");
+        if (is_null($primaryDocLength)) {
+            throw new Argument("Você deve informar o tamanho do documento principal.");
         }
-        $this->doc2 = $this->onlynumber($doc2);
+        $this->primaryDocLength = $primaryDocLength;
+        return $this;
+    }
+
+    public function setPrimaryDoc($primaryDoc = null)
+    {
+        if (is_null($primaryDoc)) {
+            throw new Argument("Você deve informar um documento principal.");
+        }
+        $this->primaryDoc = $this->onlynumber($primaryDoc);
+        return $this;
+    }
+
+    public function setSecundaryDocLength($secundaryDocLength = null)
+    {
+        if (is_null($secundaryDocLength)) {
+            throw new Argument("Você deve informar o tamanho do documento secundário.");
+        }
+        $this->secundaryDocLength = $secundaryDocLength;
+        return $this;
+    }
+
+    public function setSecundaryDoc($secundaryDoc = null)
+    {
+        if (is_null($secundaryDoc)) {
+            throw new Argument("Você deve informar um documento secundário.");
+        }
+        $this->secundaryDoc = $this->onlynumber($secundaryDoc);
         return $this;
     }
 
@@ -43,14 +76,29 @@ abstract class AbstractPerson implements PersonInterface
         return $this;
     }
 
-    public function getDoc1()
+    public function getType()
     {
-        return $this->doc1;
+        return $this->type;
     }
 
-    public function getDoc2()
+    public function getPrimaryDocLength()
     {
-        return $this->doc2;
+        return $this->primaryDocLength;
+    }
+
+    public function getPrimaryDoc()
+    {
+        return $this->primaryDoc;
+    }
+
+    public function getSecundaryDoclength()
+    {
+        return $this->secundaryDocLength;
+    }
+
+    public function getSecundaryDoc()
+    {
+        return $this->secundaryDoc;
     }
 
     public function getName()
@@ -58,9 +106,14 @@ abstract class AbstractPerson implements PersonInterface
         return $this->name;
     }
 
-    public function getType()
+    public function validatePrimaryDoc()
     {
-        return $this->type;
+        return strlen($this->primaryDoc) === $this->primaryDocLength;
+    }
+
+    public function validateSecundaryDoc()
+    {
+        return strlen($this->secundaryDoc) === $this->secundaryDocLength;
     }
 
     /**

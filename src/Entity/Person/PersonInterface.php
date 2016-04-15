@@ -10,15 +10,20 @@
 interface PersonInterface
 {
 
-    const FISICA = 1;
-    const JURIDICA = 2;
+    const NATURAL = 1;
+    const JURIDICAL = 2;
 
-    public function getDoc1();
-    public function getDoc2();
-    public function getName();
-    public function getType();
-
-    public function setDoc1($doc1 = null);
-    public function setDoc2($doc2 = null);
+    public function setType($type = null);
+    public function setPrimaryDocLength($length = null);
+    public function setPrimaryDoc($primaryDoc = null);
+    public function setSecundaryDocLength($length = null);
+    public function setSecundaryDoc($secundaryDoc = null);
     public function setName($name = null);
+
+    public function getType();
+    public function getPrimaryDoc();
+    public function getSecundaryDoc();
+    public function getName();
+    public function validatePrimaryDoc();
+    public function validateSecundaryDoc();
 }

@@ -26,12 +26,12 @@ class NaturalTest extends AbstractTest
   }
   /**
    * @expectedException UnexpectedValueException
-   * @expectedExceptionMessage Você deve informar um documento.
+   * @expectedExceptionMessage Você deve informar um documento principal.
    */
   public function testSetWithInvalidDataShouldThrownAnException()
   {
-      $this->instance->setDoc1( null );
-      $this->instance->setDoc2( null );
+      $this->instance->setPrimaryDoc( null );
+      $this->instance->setSecundaryDoc( null );
   }
   /**
    * @expectedException UnexpectedValueException
@@ -53,15 +53,15 @@ class NaturalTest extends AbstractTest
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
   public function testReturnDoc1(){
-    $this->instance->setDoc1('123.456.789-00');
-    $this->assertEquals( $this->instance->getDoc1() , 12345678900 );
+    $this->instance->setPrimaryDoc('123.456.789-00');
+    $this->assertEquals( $this->instance->getPrimaryDoc() , 12345678900 );
   }
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
   public function testReturnDoc2(){
-    $this->instance->setDoc2('1234567890');
-    $this->assertEquals( $this->instance->getDoc2() , 1234567890 );
+    $this->instance->setSecundaryDoc('1234567890');
+    $this->assertEquals( $this->instance->getSecundaryDoc() , 1234567890 );
   }
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork

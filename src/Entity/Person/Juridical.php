@@ -1,7 +1,8 @@
 <?php namespace Entity\Person;
 
 use Entity\Person\AbstractPerson;
-use Entity\Person\Exceptions\CnpjInvalidoException;
+use Entity\Person\Exceptions\PrimaryDocInvalidException;
+use Entity\Person\Exceptions\SecundaryDocInvalidException;
 
 /**
  * Classe para criação da entidade Pessoa Juridica
@@ -16,22 +17,9 @@ class Juridical extends AbstractPerson
 
     public function __construct()
     {
-        $this->type = self::JURIDICA;
+        $this->setType(self::JURIDICAL);
+        $this->setPrimaryDocLength(14);
         $this->setMask(false);
-    }
-
-    public function setCnpj($cnpj=null)
-    {
-        try {
-            if ($this->validar_cnpj($cnpj)) {
-                $this->setDoc1($cnpj);
-            } else {
-                throw new CnpjInvalidoException();
-            }
-        } catch (CnpjInvalidoException $e) {
-            return $e->getMessage();
-        }
-        return $this;
     }
 
     public function setMask($mask=false)
@@ -40,45 +28,59 @@ class Juridical extends AbstractPerson
         return $this;
     }
 
+    public function setPrimaryDoc($primaryDoc=null)
+    {
+        try {
+            parent::setPrimaryDoc($primaryDoc);
+            if (!$this->validatePrimaryDoc()) {
+                throw new PrimaryDocInvalidException();
+            }
+        } catch (PrimaryDocInvalidException $e) {
+            return $e->getMessage();
+        }
+        return $this;
+    }
+
+    public function setSecundaryDoc($secundaryDoc=null)
+    {
+        try {
+            parent::setSecundaryDoc($secundaryDoc);
+            if (!$this->validateSecundaryDoc()) {
+                throw new SecundaryDocInvalidException();
+            }
+        } catch (SecundaryDocInvalidException $e) {
+            return $e->getMessage();
+        }
+        return $this;
+    }
+
     public function getMask()
     {
         return $this->mask;
     }
 
-    public function getCnpj()
+    public function getPrimaryDoc()
     {
-        $cnpj = $this->getDoc1();
+        $primaryDoc = parent::getPrimaryDoc();
         if ($this->mask) {
-            return preg_replace('/^([\d]{2})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/', '${1}.${2}.${3}/${4}-${5}', $cnpj);
+            $primaryDoc = preg_replace('/^([\d]{2})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/', '${1}.${2}.${3}/${4}-${5}', $primaryDoc);
         }
-        return $cnpj;
-    }
-
-    public function setIe($ie=null)
-    {
-        $this->setDoc2($ie);
-        return $this;
-    }
-
-    public function getIe()
-    {
-        return $this->getDoc2();
+        return $primaryDoc;
     }
 
     /**
      * Verifica se é um número de CNPJ válido.
-     * @param $cnpj O número a ser verificado
      * @return boolean
      */
-    public function validar_cnpj($cnpj)
+    public function validatePrimaryDoc()
     {
-        $cnpj = preg_replace('/\D/', '', $cnpj);
-
-        if (strlen($cnpj) != 14) {
+        if (!parent::validatePrimaryDoc()) {
             return false;
         }
 
-        if (preg_match('/^(\d{1})\1{13}$/', $cnpj)) {
+        $primaryDoc = $this->getPrimaryDoc();
+
+        if (preg_match('/^(\d{1})\1{13}$/', $primaryDoc)) {
             return false;
         }
 
@@ -89,7 +91,7 @@ class Juridical extends AbstractPerson
              * caso for entre 4-11, diminui por 13 **/
             $multiplicador = ($i <= 3 ? 5 : 13) - $i;
 
-            $soma += $cnpj{$i}
+            $soma += $primaryDoc{$i}
             * $multiplicador;
         }
         $soma = $soma % 11;
@@ -101,7 +103,7 @@ class Juridical extends AbstractPerson
             $digitoUm = 11 - $soma;
         }
 
-        if ((int)$digitoUm == (int)$cnpj{12}) {
+        if ((int)$digitoUm == (int)$primaryDoc{12}) {
             $soma = 0;
 
             for ($i = 0; $i < 13; $i++) {
@@ -109,7 +111,7 @@ class Juridical extends AbstractPerson
                 /** verifica qual é o multiplicador. Caso o valor do caracter seja entre 0-4, diminui o valor do caracter por 6
                  * caso for entre 4-12, diminui por 14 **/
                 $multiplicador = ($i <= 4 ? 6 : 14) - $i;
-                $soma += $cnpj{$i}
+                $soma += $primaryDoc{$i}
                 * $multiplicador;
             }
             $soma = $soma % 11;
@@ -118,7 +120,7 @@ class Juridical extends AbstractPerson
             } else {
                 $digitoDois = 11 - $soma;
             }
-            if ($digitoDois == $cnpj{13}) {
+            if ($digitoDois == $primaryDoc{13}) {
                 return true;
             }
         }
