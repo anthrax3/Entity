@@ -21,9 +21,11 @@ class NaturalTest extends AbstractTest
       $this->instance = new \Entity\Person\Natural();
   }
 
-  public function testInstantiationWithoutArgumentsShouldWork(){
+  public function testInstantiationWithoutArgumentsShouldWork()
+  {
     $this->assertInstanceOf('\Entity\Person\Natural', $this->instance);
   }
+
   /**
    * @expectedException UnexpectedValueException
    * @expectedExceptionMessage Você deve informar um documento principal.
@@ -33,6 +35,7 @@ class NaturalTest extends AbstractTest
       $this->instance->setPrimaryDoc( null );
       $this->instance->setSecundaryDoc( null );
   }
+
   /**
    * @expectedException UnexpectedValueException
    * @expectedExceptionMessage Você deve informar um nome.
@@ -41,53 +44,83 @@ class NaturalTest extends AbstractTest
   {
       $this->instance->setName( null );
   }
+
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
-  public function testStringToNumber(){
-    $string = '(54)1234-6789';
+  public function testStringToNumber()
+  {
+    $string = '784.227.150-07';
     $comp = $this->instance->onlynumber($string);
-    $this->assertEquals( $comp , 5412346789 );
+    $this->assertEquals( $comp , 78422715007 );
   }
+
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
-  public function testReturnDoc1(){
-    $this->instance->setPrimaryDoc('123.456.789-00');
-    $this->assertEquals( $this->instance->getPrimaryDoc() , 12345678900 );
+  public function testReturnDoc1()
+  {
+    $return = $this->instance->setPrimaryDoc('784.227.150-07');
+    $this->assertEquals( $this->instance->getPrimaryDoc() , 78422715007 );
+    $this->assertEquals($this->instance, $return, 'Returned value should be the same instance for fluent interface');
   }
+
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
-  public function testReturnDoc2(){
-    $this->instance->setSecundaryDoc('1234567890');
+  public function testReturnDoc2()
+  {
+    $return = $this->instance->setSecundaryDocLength(10)->setSecundaryDoc('1234567890');
     $this->assertEquals( $this->instance->getSecundaryDoc() , 1234567890 );
+    $this->assertEquals($this->instance, $return, 'Returned value should be the same instance for fluent interface');
   }
+
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
-  public function testGetType(){
+  public function testGetType()
+  {
     $type = $this->instance->getType();
     $this->assertEquals( $type , 1 );
   }
+
   /**
    * @depends testInstantiationWithoutArgumentsShouldWork
    */
-  public function testShouldExistsSetterForMask(){
+  public function testGetMask()
+  {
+    $mask = $this->instance->getMask();
+    $this->assertFalse($mask);
+  }
+
+  /**
+   * @depends testInstantiationWithoutArgumentsShouldWork
+   */
+  public function testShouldExistsSetterForMask()
+  {
     $mask = true;
     $return = $this->instance->setMask( $mask );
     $this->assertEquals($this->instance, $return, 'Returned value should be the same instance for fluent interface');
     $this->assertAttributeEquals($mask, 'mask', $this->instance, 'Attribute was not correctly set');
   }
+
   /**
-   * @depends testInstantiationWithoutArgumentsShouldWork
+   * @expectedException PrimaryDocInvalidException
+   * @expectedExceptionMessage Documento principal inv&aacute;lido.
    */
-  /*
-  public function testShouldExistsSetterForCpf(){
-    $cpf = '12345678900';
-    $return = $this->instance->setCpf( $cpf );
-    $this->assertEquals($this->instance, $return, 'Returned value should be the same instance for fluent interface');
-    $this->assertAttributeEquals($cpf, 'doc1', $this->instance, 'Attribute was not correctly set');
+  public function testSetWithInvalidPrimaryDocShouldThrownAnException()
+  {
+    $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+    $this->instance->setPrimaryDoc( '1234567890' );
   }
-  */
+
+  /**
+   * @expectedException SecundaryDocInvalidException
+   * @expectedExceptionMessage Documento principal inv&aacute;lido.
+   */
+  public function testSetWithInvalidSecundaryDocShouldThrownAnException()
+  {
+    $this->setExpectedException('\Entity\Person\Exceptions\SecundaryDocInvalidException');
+    $this->instance->setSecundaryDoc( '1234567890' );
+  }
 }

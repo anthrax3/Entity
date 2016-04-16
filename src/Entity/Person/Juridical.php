@@ -30,26 +30,18 @@ class Juridical extends AbstractPerson
 
     public function setPrimaryDoc($primaryDoc=null)
     {
-        try {
-            parent::setPrimaryDoc($primaryDoc);
-            if (!$this->validatePrimaryDoc()) {
-                throw new PrimaryDocInvalidException();
-            }
-        } catch (PrimaryDocInvalidException $e) {
-            return $e->getMessage();
+        parent::setPrimaryDoc($primaryDoc);
+        if (!$this->validatePrimaryDoc()) {
+            throw new PrimaryDocInvalidException();
         }
         return $this;
     }
 
     public function setSecundaryDoc($secundaryDoc=null)
     {
-        try {
-            parent::setSecundaryDoc($secundaryDoc);
-            if (!$this->validateSecundaryDoc()) {
-                throw new SecundaryDocInvalidException();
-            }
-        } catch (SecundaryDocInvalidException $e) {
-            return $e->getMessage();
+        parent::setSecundaryDoc($secundaryDoc);
+        if (!$this->validateSecundaryDoc()) {
+            throw new SecundaryDocInvalidException();
         }
         return $this;
     }
