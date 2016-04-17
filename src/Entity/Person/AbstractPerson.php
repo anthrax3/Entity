@@ -26,7 +26,7 @@ abstract class AbstractPerson implements PersonInterface
         if (is_int($type)) {
             $this->type = $type;
         } else {
-            throw new UnexpectedValueException( sprintf( 'O valor do tipo deve ser numérico, %s foi dado.' , gettype( $type ) ) );
+            throw new Argument( sprintf( 'O valor do tipo deve ser numérico, %s foi dado.' , gettype( $type ) ) );
         }
         return $this;
     }

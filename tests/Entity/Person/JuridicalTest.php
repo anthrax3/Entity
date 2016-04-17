@@ -29,9 +29,17 @@ class JuridicalTest extends AbstractTest
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar um documento principal.
      */
-    public function testSetWithInvalidDataShouldThrownAnException()
+    public function testSetPrimaryDocWithInvalidDataShouldThrownAnException()
     {
         $this->instance->setPrimaryDoc( null );
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar um documento secundário.
+     */
+    public function testSetSecundaryDocWithInvalidDataShouldThrownAnException()
+    {
         $this->instance->setSecundaryDoc( null );
     }
 

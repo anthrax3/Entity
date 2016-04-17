@@ -27,6 +27,12 @@ class PersonTest extends AbstractTest
         $instance = new \Entity\Person();
     }
 
+    public function testSetWithInvalidDataShouldPrimaryDoc()
+    {
+        $juridical = new \Entity\Person\Juridical;
+        $juridical->setPrimaryDoc(00000000000000);
+    }
+
     /**
      * expectedException Exception
      * expectedExceptionMessage Documento n&acirc;o identificado.
@@ -45,39 +51,47 @@ class PersonTest extends AbstractTest
     {
         $doc1 = '87.408.852/0001-09';
         $instance = new \Entity\Person($doc1);
+        $instance->juridical->setName('test');
 
         $return = $instance->juridical;
 
         $juridical = new \Entity\Person\Juridical;
         $juridical->setPrimaryDoc($doc1);
+        $juridical->setName('test');
 
         $this->assertEquals($juridical, $return, 'Returned value should be the same instance for fluent interface');
         $this->assertAttributeEquals($return->getPrimaryDoc(), 'primaryDoc', $return, 'Attribute was not correctly set');
 
         $this->assertEquals($instance->getType(), 'juridical');
-        $this->assertEquals($instance->getName(), '');
+        $this->assertEquals($instance->getName(), 'test');
         $this->assertEquals($instance->getPrimaryDoc(), '87408852000109');
+        $this->assertEquals($juridical->getPrimaryDocLength(), 14);
         $this->assertEquals($instance->setMask(true)->getPrimaryDoc(), '87.408.852/0001-09');
         $this->assertEquals($instance->getSecundaryDoc(), '');
+        $this->assertEquals($juridical->getSecundaryDoclength(), null);
     }
 
     public function testNaturalInstantiationWithArgumentsShouldWork()
     {
         $doc1 = '784.227.150-07';
         $instance = new \Entity\Person($doc1);
+        $instance->natural->setName('test');
 
         $return = $instance->natural;
 
         $natural = new \Entity\Person\Natural;
         $natural->setPrimaryDoc($doc1);
+        $natural->setName('test');
 
         $this->assertEquals($natural, $return, 'Returned value should be the same instance for fluent interface');
         $this->assertAttributeEquals($return->getPrimaryDoc(), 'primaryDoc', $return, 'Attribute was not correctly set');
 
         $this->assertEquals($instance->getType(), 'natural');
-        $this->assertEquals($instance->getName(), '');
+        $this->assertEquals($instance->getName(), 'test');
         $this->assertEquals($instance->getPrimaryDoc(), '78422715007');
+        $this->assertEquals($natural->getPrimaryDocLength(), 11);
         $this->assertEquals($instance->setMask(true)->getPrimaryDoc(), '784.227.150-07');
         $this->assertEquals($instance->getSecundaryDoc(), '');
+        $this->assertEquals($natural->getSecundaryDoclength(), null);
     }
 }
