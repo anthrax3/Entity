@@ -1,6 +1,8 @@
 <?php namespace Entity\Person;
 
 use \UnexpectedValueException as Argument;
+use Entity\Person\Exceptions\PrimaryDocInvalidException;
+use Entity\Person\Exceptions\SecundaryDocInvalidException;
 
 /**
  * Classe para criação da entidade Pessoa Fisica e Juridica
@@ -11,11 +13,13 @@ use \UnexpectedValueException as Argument;
  */
 abstract class AbstractPerson implements PersonInterface
 {
+    protected $mask;
     protected $primaryDocLength;
     protected $primaryDoc;
     protected $secundaryDoc;
     protected $secundaryDocLength;
-    protected $name;
+    protected $firstName;
+    protected $lastName;
     protected $type;
 
     public function setType($type = null)
@@ -28,6 +32,12 @@ abstract class AbstractPerson implements PersonInterface
         } else {
             throw new Argument( sprintf( 'O valor do tipo deve ser numérico, %s foi dado.' , gettype( $type ) ) );
         }
+        return $this;
+    }
+
+    public function setMask($mask=false)
+    {
+        $this->mask = $mask;
         return $this;
     }
 
@@ -46,6 +56,9 @@ abstract class AbstractPerson implements PersonInterface
             throw new Argument("Você deve informar um documento principal.");
         }
         $this->primaryDoc = $this->onlynumber($primaryDoc);
+        if (!$this->validatePrimaryDoc()) {
+            throw new PrimaryDocInvalidException();
+        }
         return $this;
     }
 
@@ -64,21 +77,38 @@ abstract class AbstractPerson implements PersonInterface
             throw new Argument("Você deve informar um documento secundário.");
         }
         $this->secundaryDoc = $this->onlynumber($secundaryDoc);
+        if (!$this->validateSecundaryDoc()) {
+            throw new SecundaryDocInvalidException();
+        }
         return $this;
     }
 
-    public function setName($name = null)
+    public function setFirstName($firstName = null)
     {
-        if (is_null($name)) {
-            throw new Argument("Você deve informar um nome.");
+        if (is_null($firstName)) {
+            throw new Argument("Você deve informar o primeiro nome.");
         }
-        $this->name = $name;
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    public function setLastName($lastName = null)
+    {
+        if (is_null($lastName)) {
+            throw new Argument("Você deve informar o último nome.");
+        }
+        $this->lastName = $lastName;
         return $this;
     }
 
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getMask()
+    {
+        return $this->mask;
     }
 
     public function getPrimaryDocLength()
@@ -101,9 +131,14 @@ abstract class AbstractPerson implements PersonInterface
         return $this->secundaryDoc;
     }
 
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->firstName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 
     public function validatePrimaryDoc()

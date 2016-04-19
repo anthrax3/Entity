@@ -1,8 +1,6 @@
 <?php namespace Entity\Person;
 
 use Entity\Person\AbstractPerson;
-use Entity\Person\Exceptions\PrimaryDocInvalidException;
-use Entity\Person\Exceptions\SecundaryDocInvalidException;
 
 /**
  * Classe para criação da entidade Pessoa Juridica
@@ -12,8 +10,8 @@ use Entity\Person\Exceptions\SecundaryDocInvalidException;
  */
 class Juridical extends AbstractPerson
 {
-
-    protected $mask;
+    protected $corporateName;
+    protected $tradingName;
 
     public function __construct()
     {
@@ -22,33 +20,46 @@ class Juridical extends AbstractPerson
         $this->setMask(false);
     }
 
-    public function setMask($mask=false)
+    public function setFirstName($firstName = null)
     {
-        $this->mask = $mask;
+        parent::setFirstName($firstName);
+        $this->setCorporateName($firstName);
         return $this;
     }
 
-    public function setPrimaryDoc($primaryDoc=null)
+    public function setLastName($lastName = null)
     {
-        parent::setPrimaryDoc($primaryDoc);
-        if (!$this->validatePrimaryDoc()) {
-            throw new PrimaryDocInvalidException();
+        parent::setLastName($lastName);
+        $this->setTradingName($lastName);
+        return $this;
+    }
+
+    public function setCorporateName($corporateName = null)
+    {
+        if (is_null($corporateName)) {
+            throw new Argument("Você deve informar a razão social.");
         }
+        $this->corporateName = $corporateName;
         return $this;
     }
 
-    public function setSecundaryDoc($secundaryDoc=null)
+    public function setTradingName($tradingName = null)
     {
-        parent::setSecundaryDoc($secundaryDoc);
-        if (!$this->validateSecundaryDoc()) {
-            throw new SecundaryDocInvalidException();
+        if (is_null($tradingName)) {
+            throw new Argument("Você deve informar o nome fantasía.");
         }
+        $this->tradingName = $tradingName;
         return $this;
     }
 
-    public function getMask()
+    public function getCorporateName()
     {
-        return $this->mask;
+        return $this->corporateName;
+    }
+
+    public function getTradingName()
+    {
+        return $this->tradingName;
     }
 
     public function getPrimaryDoc()

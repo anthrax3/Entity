@@ -1,8 +1,6 @@
 <?php namespace Entity\Person;
 
 use Entity\Person\AbstractPerson;
-use Entity\Person\Exceptions\PrimaryDocInvalidException;
-use Entity\Person\Exceptions\SecundaryDocInvalidException;
 
 /**
  * Classe para criação da entidade Pessoa Fisica
@@ -12,43 +10,11 @@ use Entity\Person\Exceptions\SecundaryDocInvalidException;
  */
 class Natural extends AbstractPerson
 {
-
-    protected $mask;
-
     public function __construct()
     {
         $this->setType(self::NATURAL);
         $this->setPrimaryDocLength(11);
         $this->setMask(false);
-    }
-
-    public function setMask($mask=false)
-    {
-        $this->mask = $mask;
-        return $this;
-    }
-
-    public function setPrimaryDoc($primaryDoc=null)
-    {
-        parent::setPrimaryDoc($primaryDoc);
-        if (!$this->validatePrimaryDoc()) {
-            throw new PrimaryDocInvalidException();
-        }
-        return $this;
-    }
-
-    public function setSecundaryDoc($secundaryDoc=null)
-    {
-        parent::setSecundaryDoc($secundaryDoc);
-        if (!$this->validateSecundaryDoc()) {
-            throw new SecundaryDocInvalidException();
-        }
-        return $this;
-    }
-
-    public function getMask()
-    {
-        return $this->mask;
     }
 
     public function getPrimaryDoc()

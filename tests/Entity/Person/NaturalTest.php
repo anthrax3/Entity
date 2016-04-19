@@ -27,33 +27,6 @@ class NaturalTest extends AbstractTest
     }
 
     /**
-     * @expectedException UnexpectedValueException
-     * @expectedExceptionMessage Você deve informar um documento principal.
-     */
-    public function testSetPrimaryDocWithInvalidDataShouldThrownAnException()
-    {
-        $this->instance->setPrimaryDoc( null );
-    }
-
-    /**
-     * @expectedException UnexpectedValueException
-     * @expectedExceptionMessage Você deve informar um documento secundário.
-     */
-    public function testSetSecundaryDocWithInvalidDataShouldThrownAnException()
-    {
-        $this->instance->setSecundaryDoc( null );
-    }
-
-    /**
-    * @expectedException UnexpectedValueException
-    * @expectedExceptionMessage Você deve informar um nome.
-    */
-    public function testSetWithInvalidDataNameShouldThrownAnException()
-    {
-        $this->instance->setName( null );
-    }
-
-    /**
     * @depends testInstantiationWithoutArgumentsShouldWork
     */
     public function testStringToNumber()

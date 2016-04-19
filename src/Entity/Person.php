@@ -92,11 +92,29 @@ class Person
 
     public function setMask($mask = false)
     {
-        if ($this->type ==1) {
-            $this->natural->setMask($mask);
-        } elseif ($this->type == 2) {
-            $this->juridical->setMask($mask);
-        }
+        $this->{$this->getType()}->setMask($mask);
+        return $this;
+    }
+
+    public function setPrimaryDoc($primaryDoc = null)
+    {
+        return $this->{$this->getType()}->setPrimaryDoc($primaryDoc);
+    }
+
+    public function setSecundaryDoc($secundaryDoc = null)
+    {
+        return $this->{$this->getType()}->setSecundaryDoc($secundaryDoc);
+    }
+
+    public function setFirstName($firstName = false)
+    {
+        $this->{$this->getType()}->setFirstName($firstName);
+        return $this;
+    }
+
+    public function setLastName($lastName = false)
+    {
+        $this->{$this->getType()}->setLastName($lastName);
         return $this;
     }
 
@@ -107,24 +125,24 @@ class Person
 
     public function getType()
     {
-        $type = null;
         if ($this->type == 1) {
             $type = 'natural';
         } else if ($this->type == 2) {
             $type = 'juridical';
+        } else {
+            throw new Exception('Tipo e pessoa não definido.');
         }
         return $type;
     }
 
-    public function getName()
+    public function getFirstName()
     {
-        $name = null;
-        if ($this->type == 1) {
-            $name = $this->natural->getName();
-        } elseif ($this->type==2) {
-            $name = $this->juridical->getName();
-        }
-        return $name;
+        return $this->{$this->getType()}->getFirstName();
+    }
+
+     public function getLastName()
+    {
+        return $this->{$this->getType()}->getLastName();
     }
 
     public function getPrimaryDoc()

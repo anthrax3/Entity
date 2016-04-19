@@ -18,12 +18,14 @@ interface PersonInterface
     public function setPrimaryDoc($primaryDoc = null);
     public function setSecundaryDocLength($length = null);
     public function setSecundaryDoc($secundaryDoc = null);
-    public function setName($name = null);
+    public function setFirstName($firstName = null);
+    public function setLastName($lastName = null);
 
     public function getType();
     public function getPrimaryDoc();
     public function getSecundaryDoc();
-    public function getName();
+    public function getFirstName();
+    public function getLastName();
     public function validatePrimaryDoc();
     public function validateSecundaryDoc();
 }

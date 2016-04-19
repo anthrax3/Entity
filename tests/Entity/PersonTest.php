@@ -15,7 +15,7 @@ class PersonTest extends AbstractTest
         $this->assertTrue(
               class_exists($class = '\Entity\Person'),
               'Class not found: '.$class
-      );
+        );
     }
 
     /**
@@ -27,8 +27,55 @@ class PersonTest extends AbstractTest
         $instance = new \Entity\Person();
     }
 
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o primeiro nome.
+     */
+    public function testSetWithInvalidFirstNameShouldThrownAnException()
+    {
+        $instance = new \Entity\Person('87.408.852/0001-09');
+        $instance->setFirstName( null );
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o último nome.
+     */
+    public function testSetWithInvalidLastNameShouldThrownAnException()
+    {
+        $instance = new \Entity\Person('87.408.852/0001-09');
+        $instance->setLastName( null );
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar um documento principal.
+     */
+    public function testSetWithInvalidPrimaryDocShouldThrownAnException()
+    {
+        $instance = new \Entity\Person('87.408.852/0001-09');
+        $instance->setPrimaryDoc( null );
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar um documento secundário.
+     */
+    public function testSetWithInvalidSecundaryDocShouldThrownAnException()
+    {
+        $instance = new \Entity\Person('87.408.852/0001-09');
+        $instance->setSecundaryDoc( null );
+    }
+
+    /**
+    * @depends testSetWithInvalidDataShouldThrownAnException
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
     public function testSetWithInvalidDataShouldPrimaryDoc()
     {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+
         $juridical = new \Entity\Person\Juridical;
         $juridical->setPrimaryDoc(00000000000000);
     }
@@ -51,19 +98,22 @@ class PersonTest extends AbstractTest
     {
         $doc1 = '87.408.852/0001-09';
         $instance = new \Entity\Person($doc1);
-        $instance->juridical->setName('test');
+        $instance->setFirstName('FirstName')
+                 ->setLastName('LastName');
 
         $return = $instance->juridical;
 
         $juridical = new \Entity\Person\Juridical;
         $juridical->setPrimaryDoc($doc1);
-        $juridical->setName('test');
+        $juridical->setFirstName('FirstName');
+        $juridical->setLastName('LastName');
 
         $this->assertEquals($juridical, $return, 'Returned value should be the same instance for fluent interface');
         $this->assertAttributeEquals($return->getPrimaryDoc(), 'primaryDoc', $return, 'Attribute was not correctly set');
 
         $this->assertEquals($instance->getType(), 'juridical');
-        $this->assertEquals($instance->getName(), 'test');
+        $this->assertEquals($instance->getFirstName(), 'FirstName');
+        $this->assertEquals($instance->getLastName(), 'LastName');
         $this->assertEquals($instance->getPrimaryDoc(), '87408852000109');
         $this->assertEquals($juridical->getPrimaryDocLength(), 14);
         $this->assertEquals($instance->setMask(true)->getPrimaryDoc(), '87.408.852/0001-09');
@@ -75,19 +125,22 @@ class PersonTest extends AbstractTest
     {
         $doc1 = '784.227.150-07';
         $instance = new \Entity\Person($doc1);
-        $instance->natural->setName('test');
+        $instance->setFirstName('FirstName')
+                 ->setLastName('LastName');
 
         $return = $instance->natural;
 
         $natural = new \Entity\Person\Natural;
         $natural->setPrimaryDoc($doc1);
-        $natural->setName('test');
+        $natural->setFirstName('FirstName');
+        $natural->setLastName('LastName');
 
         $this->assertEquals($natural, $return, 'Returned value should be the same instance for fluent interface');
         $this->assertAttributeEquals($return->getPrimaryDoc(), 'primaryDoc', $return, 'Attribute was not correctly set');
 
         $this->assertEquals($instance->getType(), 'natural');
-        $this->assertEquals($instance->getName(), 'test');
+        $this->assertEquals($instance->getFirstName(), 'FirstName');
+        $this->assertEquals($instance->getLastName(), 'LastName');
         $this->assertEquals($instance->getPrimaryDoc(), '78422715007');
         $this->assertEquals($natural->getPrimaryDocLength(), 11);
         $this->assertEquals($instance->setMask(true)->getPrimaryDoc(), '784.227.150-07');
