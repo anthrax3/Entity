@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit verbose="true"
          bootstrap="tests/bootstrap.php"
-         colors="true"
->
+         colors="true">
 
   <!-- Test suites to be run -->
   <testsuites>
-    <testsuite name="restler">
+    <testsuite name="Entity Tests">
       <directory suffix="Test.php">tests</directory>
     </testsuite>
   </testsuites>
