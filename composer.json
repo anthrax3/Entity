@@ -19,8 +19,8 @@
         "bin-dir": "bin/"
     },
     "autoload": {
-        "psr-0": {
-            "": "src/"
+        "psr-4": {
+            "Entity" : "src/"
         }
     },
     "minimum-stability": "dev"

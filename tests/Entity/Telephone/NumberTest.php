@@ -1,4 +1,4 @@
-<?php namespace Entity\Telephone;
+<?php
 
 use Entity\AbstractTest;
 

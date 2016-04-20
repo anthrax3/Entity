@@ -1,4 +1,4 @@
-<?php namespace Entity;
+<?php
 
 use Entity\AbstractTest;
 

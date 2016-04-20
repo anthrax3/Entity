@@ -1,4 +1,4 @@
-<?php namespace Entity\Address;
+<?php
 
 use Entity\AbstractTest;
 
