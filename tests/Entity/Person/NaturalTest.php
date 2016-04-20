@@ -14,10 +14,10 @@ class NaturalTest extends AbstractTest
 
     public function assertPreConditions()
     {
-        $this->assertTrue(
-              class_exists($class = 'Entity\Person\Natural'),
-              'Class not found: '.$class
-        );
+        // $this->assertTrue(
+        //       class_exists($class = 'Entity\Person\Natural'),
+        //       'Class not found: '.$class
+        // );
         $this->instance = new \Entity\Person\Natural();
     }
 
