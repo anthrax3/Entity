@@ -13,7 +13,7 @@ class PersonTest extends AbstractTest
     public function assertPreConditions()
     {
         $this->assertTrue(
-              class_exists($class = '\Entity\Person'),
+              class_exists($class = 'Entity\Person'),
               'Class not found: '.$class
         );
     }

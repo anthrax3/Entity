@@ -15,7 +15,7 @@ class AddressTest extends AbstractTest
     public function assertPreConditions()
     {
         $this->assertTrue(
-              class_exists($class = '\Entity\Address'),
+              class_exists($class = 'Entity\Address'),
               'Class not found: '.$class
         );
         $this->instance = new \Entity\Address();

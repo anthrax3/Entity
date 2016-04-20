@@ -15,7 +15,7 @@ class NumberTest extends AbstractTest
     public function assertPreConditions()
     {
         $this->assertTrue(
-              class_exists($class = '\Entity\Telephone\Number'),
+              class_exists($class = 'Entity\Telephone\Number'),
               'Class not found: '.$class
         );
         $this->instance = new \Entity\Telephone\Number('type', '00000000');

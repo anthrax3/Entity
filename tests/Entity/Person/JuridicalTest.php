@@ -15,7 +15,7 @@ class JuridicalTest extends AbstractTest
     public function assertPreConditions()
     {
         $this->assertTrue(
-              class_exists($class = '\Entity\Person\Juridical'),
+              class_exists($class = 'Entity\Person\Juridical'),
               'Class not found: '.$class
       );
         $this->instance = new \Entity\Person\Juridical();

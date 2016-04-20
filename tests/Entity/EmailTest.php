@@ -15,7 +15,7 @@ class EmailTest extends AbstractTest
     public function assertPreConditions()
     {
         $this->assertTrue(
-              class_exists($class = '\Entity\Email'),
+              class_exists($class = 'Entity\Email'),
               'Class not found: '.$class
         );
         $this->instance = new \Entity\Email('email1', 'admin@admin.com');
