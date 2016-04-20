@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-         verbose="false"
+<phpunit verbose="false"
          stopOnError="false"
          stopOnFailure="false"
          stopOnIncomplete="false"
@@ -11,24 +10,31 @@
          colors="false"
          forceCoversAnnotation="false"
          processIsolation="false">
-    <testsuites>
-        <testsuite name="Entity Tests">
-            <directory>./tests/</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <blacklist>
-            <directory suffix=".php">./vendor</directory>
-        </blacklist>
-    </filter>
-    <groups>
+
+  <!-- Test suites to be run -->
+  <testsuites>
+    <testsuite name="Entity Tests">
+      <directory>./tests/</directory>
+    </testsuite>
+  </testsuites>
+
+  <!-- Filters for code coverage reporting -->
+  <filter>
+      <whitelist>
+        <directory>./</directory>
         <exclude>
-            <group>languages</group>
+          <directory>./public</directory>
+          <directory>./tests</directory>
+          <directory>./vendor</directory>
         </exclude>
-    </groups>
-    <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
-    </logging>
+      </whitelist>
+  </filter>
+
+  <!-- Logging -->
+  <logging>
+      <log type="coverage-clover" target="tests/coverage/clover.xml" />
+      <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
+      <log type="junit" target="tests/coverage/junit.xml" logIncompleteSkipped="false"/>
+  </logging>
+
 </phpunit>
