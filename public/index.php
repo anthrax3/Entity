@@ -1,13 +1,19 @@
 <?php
 require __DIR__.'/../tests/bootstrap.php';
 echo "<pre>";
-$pessoa = new Pessoa\Pessoa();
-var_dump($pessoa);
-var_dump($pessoa->getError());
-$pessoa = new Pessoa\Pessoa('35913314816');
-var_dump($pessoa->fisica->getCpf());
-var_dump($pessoa->fisica->setMask(true)->getCpf());
-$pessoa = new Pessoa\Pessoa('89.373.074/0001-87');
-var_dump($pessoa->juridica->getCnpj());
-var_dump($pessoa->juridica->setMask(true)->getCnpj());
+$person = new Entity\Person('42.986.576/0001-10');
+$person->setFirstName('Razão Social');
+$person->setLastName('Nome Fantasia');
+
+$telephone = new Entity\Telephone\Number('comercial', '0000000000');
+
+$address = new Entity\Address();
+$address->setStreet('Street 1')
+        ->setNumber('Number 1')
+        ->setComplement('Complement 1')
+        ->setSuburb('Suburb 1')
+        ->setZoneCode('99099000')
+        ->setZone('RS')
+        ->setCountry('Brasil')
+        ;
 echo "</pre>";

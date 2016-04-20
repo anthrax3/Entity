@@ -2,7 +2,7 @@
 
 ### Entidade Pessoa, Endereço e Telefone.
 
-Build status: [![Build Status](https://travis-ci.org/rbarros/Entity)](https://travis-ci.org/rbarros/Entity)
+[![Build Status](https://travis-ci.org/rbarros/Entity.svg?branch=master)](https://travis-ci.org/rbarros/Entity)
 
 Você pode instalar com Composer (recomendado) ou manualmente.
 
