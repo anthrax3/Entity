@@ -9,6 +9,7 @@
  */
 interface AddressInterface
 {
+    public function setType($type = null);
     public function setStreet($street = null);
     public function setNumber($number = null);
     public function setComplement($complement = null);
@@ -18,6 +19,7 @@ interface AddressInterface
     public function setZoneCode($zoneCode = null);
     public function setCountry($country = null);
 
+    public function getType();
     public function getStreet();
     public function getNumber();
     public function getComplement();

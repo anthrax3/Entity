@@ -13,6 +13,7 @@ abstract class AbstractAddress implements AddressInterface
 {
 
     protected $mask;
+    protected $type;
     protected $street;
     protected $number;
     protected $complement;
@@ -21,6 +22,16 @@ abstract class AbstractAddress implements AddressInterface
     protected $zoneCode;
     protected $zone;
     protected $country;
+
+    /**
+     * Seta o tipo de endereço (comercial, residencial, etc)
+     * @param boolean $type
+     */
+    public function setType($type = false)
+    {
+        $this->type = $type;
+        return $this;
+    }
 
     /**
      * Seta retorno do zoneCode com máscara
@@ -134,6 +145,15 @@ abstract class AbstractAddress implements AddressInterface
         }
         $this->country = $country;
         return $this;
+    }
+
+    /**
+     * Retorna o tipo de endereço
+     * @return boolean
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
