@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Entity\\" : "src/"
+            "Entity\\" : "src/Entity"
         }
     },
     "minimum-stability": "dev"
