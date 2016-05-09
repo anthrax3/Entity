@@ -18,11 +18,11 @@ class JuridicalTest extends AbstractTest
         //       class_exists($class = 'Entity\Person\Juridical'),
         //       'Class not found: '.$class
         // );
-        $this->instance = new \Entity\Person\Juridical();
+        $this->instance = new Entity\Person\Juridical();
     }
     public function testInstantiationWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('\Entity\Person\Juridical', $this->instance);
+        $this->assertInstanceOf('Entity\\Person\\Juridical', $this->instance);
     }
 
     /**

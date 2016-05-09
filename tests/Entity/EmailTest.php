@@ -18,12 +18,12 @@ class EmailTest extends AbstractTest
         //       class_exists($class = 'Entity\Email'),
         //       'Class not found: '.$class
         // );
-        $this->instance = new \Entity\Email('email1', 'admin@admin.com');
+        $this->instance = new Entity\Email('email1', 'admin@admin.com');
     }
 
     public function testInstantiationWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('\Entity\Email', $this->instance);
+        $this->assertInstanceOf('Entity\\Email', $this->instance);
     }
 
     /**

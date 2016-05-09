@@ -10,13 +10,16 @@ use Entity\AbstractTest;
 */
 class PersonTest extends AbstractTest
 {
-    // public function assertPreConditions()
-    // {
-    //     $this->assertTrue(
-    //           class_exists($class = 'Entity\Person'),
-    //           'Class not found: '.$class
-    //     );
-    // }
+    private $instance;
+
+    public function assertPreConditions()
+    {
+        // $this->assertTrue(
+        //       class_exists($class = 'Entity\Email'),
+        //       'Class not found: '.$class
+        // );
+        $this->instance = new Entity\Person('87.408.852/0001-09');
+    }
 
     /**
      * expectedException Exception
@@ -24,7 +27,7 @@ class PersonTest extends AbstractTest
      */
     public function testSetWithInvalidDataShouldThrownAnException()
     {
-        $instance = new \Entity\Person();
+        $instance = new Entity\Person();
     }
 
     /**
@@ -33,8 +36,7 @@ class PersonTest extends AbstractTest
      */
     public function testSetWithInvalidFirstNameShouldThrownAnException()
     {
-        $instance = new \Entity\Person('87.408.852/0001-09');
-        $instance->setFirstName( null );
+        $this->instance->setFirstName( null );
     }
 
     /**
@@ -43,8 +45,7 @@ class PersonTest extends AbstractTest
      */
     public function testSetWithInvalidLastNameShouldThrownAnException()
     {
-        $instance = new \Entity\Person('87.408.852/0001-09');
-        $instance->setLastName( null );
+        $this->instance->setLastName( null );
     }
 
     /**
@@ -53,8 +54,7 @@ class PersonTest extends AbstractTest
      */
     public function testSetWithInvalidPrimaryDocShouldThrownAnException()
     {
-        $instance = new \Entity\Person('87.408.852/0001-09');
-        $instance->setPrimaryDoc( null );
+        $this->instance->setPrimaryDoc( null );
     }
 
     /**
@@ -63,8 +63,7 @@ class PersonTest extends AbstractTest
      */
     public function testSetWithInvalidSecundaryDocShouldThrownAnException()
     {
-        $instance = new \Entity\Person('87.408.852/0001-09');
-        $instance->setSecundaryDoc( null );
+        $this->instance->setSecundaryDoc( null );
     }
 
     /**
@@ -76,7 +75,7 @@ class PersonTest extends AbstractTest
     {
         $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
 
-        $juridical = new \Entity\Person\Juridical;
+        $juridical = new Entity\Person\Juridical;
         $juridical->setPrimaryDoc(00000000000000);
     }
 
@@ -86,7 +85,7 @@ class PersonTest extends AbstractTest
      */
     public function testSetWithInvalidDocShouldThrownAnException()
     {
-        $instance = new \Entity\Person('0000000000');
+        $instance = new Entity\Person('0000000000');
 
         $error = new \stdClass();
         $error->status = true;
@@ -97,13 +96,13 @@ class PersonTest extends AbstractTest
     public function testJuridicalInstantiationWithArgumentsShouldWork()
     {
         $doc1 = '87.408.852/0001-09';
-        $instance = new \Entity\Person($doc1);
+        $instance = new Entity\Person($doc1);
         $instance->setFirstName('FirstName')
                  ->setLastName('LastName');
 
         $return = $instance->juridical;
 
-        $juridical = new \Entity\Person\Juridical;
+        $juridical = new Entity\Person\Juridical;
         $juridical->setPrimaryDoc($doc1);
         $juridical->setFirstName('FirstName');
         $juridical->setLastName('LastName');
@@ -124,13 +123,13 @@ class PersonTest extends AbstractTest
     public function testNaturalInstantiationWithArgumentsShouldWork()
     {
         $doc1 = '784.227.150-07';
-        $instance = new \Entity\Person($doc1);
+        $instance = new Entity\Person($doc1);
         $instance->setFirstName('FirstName')
                  ->setLastName('LastName');
 
         $return = $instance->natural;
 
-        $natural = new \Entity\Person\Natural;
+        $natural = new Entity\Person\Natural;
         $natural->setPrimaryDoc($doc1);
         $natural->setFirstName('FirstName');
         $natural->setLastName('LastName');

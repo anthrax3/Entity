@@ -18,12 +18,12 @@ class AddressTest extends AbstractTest
         //       class_exists($class = 'Entity\Address'),
         //       'Class not found: '.$class
         // );
-        $this->instance = new \Entity\Address();
+        $this->instance = new Entity\Address();
     }
 
     public function testInstantiationWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('\Entity\Address', $this->instance);
+        $this->assertInstanceOf('Entity\\Address', $this->instance);
     }
 
     /**

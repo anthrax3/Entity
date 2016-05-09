@@ -18,12 +18,12 @@ class NumberTest extends AbstractTest
         //       class_exists($class = 'Entity\Telephone\Number'),
         //       'Class not found: '.$class
         // );
-        $this->instance = new \Entity\Telephone\Number('type', '00000000');
+        $this->instance = new Entity\Telephone\Number('type', '00000000');
     }
 
     public function testInstantiationWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('\Entity\Telephone\Number', $this->instance);
+        $this->assertInstanceOf('Entity\\Telephone\\Number', $this->instance);
     }
 
     /**

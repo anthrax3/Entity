@@ -18,12 +18,12 @@ class NaturalTest extends AbstractTest
         //       class_exists($class = 'Entity\Person\Natural'),
         //       'Class not found: '.$class
         // );
-        $this->instance = new \Entity\Person\Natural();
+        $this->instance = new Entity\Person\Natural();
     }
 
     public function testInstantiationWithoutArgumentsShouldWork()
     {
-        $this->assertInstanceOf('\Entity\Person\Natural', $this->instance);
+        $this->assertInstanceOf('Entity\\Person\\Natural', $this->instance);
     }
 
     /**
