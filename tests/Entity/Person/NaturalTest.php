@@ -125,6 +125,42 @@ class NaturalTest extends AbstractTest
     }
 
     /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
+    public function testSetWithInvalidPrimaryDocEqualDigits()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(11)
+                       ->setPrimaryDoc('11111111111');
+    }
+
+    /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
+    public function testSetWithInvalidPrimaryDocNoneDigit()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(11)
+                       ->setPrimaryDoc('11111111121');
+    }
+
+    /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
+    public function testSetWithInvalidPrimaryDocTenDigit()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(11)
+                       ->setPrimaryDoc('11111111112');
+    }
+
+    /**
     * @expectedException SecundaryDocInvalidException
     * @expectedExceptionMessage Documento principal inv&aacute;lido.
     */

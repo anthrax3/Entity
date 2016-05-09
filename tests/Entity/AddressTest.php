@@ -29,6 +29,16 @@ class AddressTest extends AbstractTest
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o tipo de endereço.
+     */
+    public function testSetTypeNull()
+    {
+        $this->instance->setType(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar a rua.
      */
     public function testSetStreetNull()
@@ -151,7 +161,8 @@ class AddressTest extends AbstractTest
      */
     public function testAddressInstantiationWithArgumentsShouldWork()
     {
-        $this->instance->setStreet('Street 1')
+        $this->instance->setType('Type 1')
+                       ->setStreet('Street 1')
                        ->setNumber('Number 1')
                        ->setComplement('Complement 1')
                        ->setSuburbId(55)
@@ -164,6 +175,7 @@ class AddressTest extends AbstractTest
                        ->setCountryId(88)
                        ->setCountry('Country 1');
 
+        $this->assertEquals($this->instance->getType(), 'Type 1');
         $this->assertEquals($this->instance->getStreet(), 'Street 1');
         $this->assertEquals($this->instance->getNumber(), 'Number 1');
         $this->assertEquals($this->instance->getComplement(), 'Complement 1');

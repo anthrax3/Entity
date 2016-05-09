@@ -145,6 +145,42 @@ class JuridicalTest extends AbstractTest
     }
 
     /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
+    public function testSetWithInvalidPrimaryDocEqualDigits()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(14)
+                       ->setPrimaryDoc('11111111111111');
+    }
+
+    /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
+    public function testSetWithInvalidPrimaryDocNoneDigit()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(14)
+                       ->setPrimaryDoc('11111111111121');
+    }
+
+    /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException PrimaryDocInvalidException
+    * @expectedExceptionMessage Documento principal inv&aacute;lido.
+    */
+    public function testSetWithInvalidPrimaryDocTenDigit()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(14)
+                       ->setPrimaryDoc('11111111111112');
+    }
+
+    /**
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o tamanho do documento principal.
      */

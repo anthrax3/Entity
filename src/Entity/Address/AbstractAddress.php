@@ -33,6 +33,9 @@ abstract class AbstractAddress implements AddressInterface
      */
     public function setType($type = false)
     {
+        if (is_null($type)) {
+            throw new Argument("Você deve informar o tipo de endereço.");
+        }
         $this->type = $type;
         return $this;
     }
