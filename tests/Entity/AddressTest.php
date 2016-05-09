@@ -14,16 +14,26 @@ class AddressTest extends AbstractTest
 
     public function assertPreConditions()
     {
-        // $this->assertTrue(
-        //       class_exists($class = 'Entity\Address'),
-        //       'Class not found: '.$class
-        // );
+        $this->assertTrue(
+              class_exists($class = 'Entity\\Address'),
+              'Class not found: '.$class
+        );
         $this->instance = new Entity\Address();
     }
 
     public function testInstantiationWithoutArgumentsShouldWork()
     {
         $this->assertInstanceOf('Entity\\Address', $this->instance);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o id do endereço.
+     */
+    public function testSetIdNull()
+    {
+        $this->instance->setId(null);
     }
 
     /**
@@ -161,7 +171,8 @@ class AddressTest extends AbstractTest
      */
     public function testAddressInstantiationWithArgumentsShouldWork()
     {
-        $this->instance->setType('Type 1')
+        $this->instance->setId(123)
+                       ->setType('Type 1')
                        ->setStreet('Street 1')
                        ->setNumber('Number 1')
                        ->setComplement('Complement 1')
@@ -175,6 +186,7 @@ class AddressTest extends AbstractTest
                        ->setCountryId(88)
                        ->setCountry('Country 1');
 
+        $this->assertEquals($this->instance->getId(), 123);
         $this->assertEquals($this->instance->getType(), 'Type 1');
         $this->assertEquals($this->instance->getStreet(), 'Street 1');
         $this->assertEquals($this->instance->getNumber(), 'Number 1');

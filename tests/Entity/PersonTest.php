@@ -14,10 +14,10 @@ class PersonTest extends AbstractTest
 
     public function assertPreConditions()
     {
-        // $this->assertTrue(
-        //       class_exists($class = 'Entity\Email'),
-        //       'Class not found: '.$class
-        // );
+        $this->assertTrue(
+              class_exists($class = 'Entity\\Email'),
+              'Class not found: '.$class
+        );
         $this->instance = new Entity\Person('87.408.852/0001-09');
     }
 

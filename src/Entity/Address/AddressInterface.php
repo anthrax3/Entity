@@ -9,6 +9,7 @@
  */
 interface AddressInterface
 {
+    public function setId($id = null);
     public function setType($type = null);
     public function setStreet($street = null);
     public function setNumber($number = null);
@@ -23,6 +24,7 @@ interface AddressInterface
     public function setCountryId($countryId = null);
     public function setCountry($country = null);
 
+    public function getId();
     public function getType();
     public function getStreet();
     public function getNumber();

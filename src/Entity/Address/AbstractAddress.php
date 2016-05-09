@@ -11,7 +11,7 @@ use Entity\Address\AddressInterface;
  */
 abstract class AbstractAddress implements AddressInterface
 {
-
+    protected $id;
     protected $mask;
     protected $type;
     protected $street;
@@ -28,8 +28,23 @@ abstract class AbstractAddress implements AddressInterface
     protected $country;
 
     /**
+     * Seta o id do endereço
+     * @param integer $id
+     * @return Address
+     */
+    public function setId($id = null)
+    {
+        if (is_null($id)) {
+            throw new Argument("Você deve informar o id do endereço.");
+        }
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * Seta o tipo de endereço (comercial, residencial, etc)
      * @param boolean $type
+     * @return Address
      */
     public function setType($type = false)
     {
@@ -43,6 +58,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Seta retorno do zoneCode com máscara
      * @param boolean $mask
+     * @return Address
      */
     public function setMask($mask = false)
     {
@@ -53,6 +69,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra a Rua do endereço
      * @param string $street
+     * @return Address
      */
     public function setStreet($street = null)
     {
@@ -66,6 +83,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o numero do endereço
      * @param string $number
+     * @return Address
      */
     public function setNumber($number = null)
     {
@@ -79,6 +97,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o complemento do Endereço
      * @param string $complement
+     * @return Address
      */
     public function setComplement($complement = null)
     {
@@ -92,6 +111,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o id do bairro
      * @param string $suburbId
+     * @return Address
      */
     public function setSuburbId($suburbId = null)
     {
@@ -105,6 +125,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o bairro do endereço
      * @param string $suburb
+     * @return Address
      */
     public function setSuburb($suburb = null)
     {
@@ -118,6 +139,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o id da cidade
      * @param string $cityId
+     * @return Address
      */
     public function setCityId($cityId = null)
     {
@@ -131,6 +153,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra a cidade do endereço
      * @param string $city
+     * @return Address
      */
     public function setCity($city = null)
     {
@@ -144,6 +167,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o cep do endereço
      * @param string $zoneCode
+     * @return Address
      */
     public function setZoneCode($zoneCode = null)
     {
@@ -157,6 +181,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o id do estado
      * @param string $zoneId
+     * @return Address
      */
     public function setZoneId($zoneId = null)
     {
@@ -170,6 +195,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o estado do endereço
      * @param string $zone
+     * @return Address
      */
     public function setZone($zone = null)
     {
@@ -183,6 +209,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o id do país
      * @param string $countryId
+     * @return Address
      */
     public function setCountryId($countryId = null)
     {
@@ -196,6 +223,7 @@ abstract class AbstractAddress implements AddressInterface
     /**
      * Registra o país do endereço
      * @param string $country
+     * @return Address
      */
     public function setCountry($country = null)
     {
@@ -204,6 +232,15 @@ abstract class AbstractAddress implements AddressInterface
         }
         $this->country = $country;
         return $this;
+    }
+
+    /**
+     * Retorna o id do endereço
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
