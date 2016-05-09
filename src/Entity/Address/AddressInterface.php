@@ -20,7 +20,7 @@ interface AddressInterface
     public function setZoneId($zoneId = null);
     public function setZone($zone = null);
     public function setZoneCode($zoneCode = null);
-    public function setCountryId($country = null);
+    public function setCountryId($countryId = null);
     public function setCountry($country = null);
 
     public function getType();

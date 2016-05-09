@@ -60,6 +60,15 @@ class Number extends Container
     }
 
     /**
+     * Recupera o tipo de numero telefonico
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * Recupera o numero telefonico referente ao tipo informado
      * @param  string $type
      * @return mixed

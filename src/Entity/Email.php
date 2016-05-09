@@ -48,7 +48,16 @@ class Email extends Container
     }
 
     /**
-     * Recupera o numero telefonico referente ao tipo informado
+     * Recupera o tipo de email
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Recupera o endereço de email referente ao tipo informado
      * @param  string $type
      * @return mixed
      */
@@ -62,7 +71,7 @@ class Email extends Container
     }
 
     /**
-     * Recupera as instancias dos numeros registrados
+     * Recupera as instancias dos endereços de email registrados
      * @return object
      */
     public function getAddresses()
