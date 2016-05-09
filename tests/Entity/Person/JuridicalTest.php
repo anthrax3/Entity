@@ -191,7 +191,7 @@ class JuridicalTest extends AbstractTest
 
     /**
      * @expectedException SecundaryDocInvalidException
-     * @expectedExceptionMessage Documento principal inv&aacute;lido.
+     * @expectedExceptionMessage Documento secundário inv&aacute;lido.
      */
     public function testSetWithInvalidSecundaryDocShouldThrownAnException()
     {
