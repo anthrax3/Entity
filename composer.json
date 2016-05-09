@@ -2,7 +2,7 @@
     "name": "rbarros/entity",
     "description": "Entidade comuns.",
     "type": "git",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "require": {
         "php": " >= 5.3.7",
         "phpunit/phpunit": "~4.7",
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Entity\\" : "src/"
+            "Entity\\" : "src/Entity"
         }
     },
     "minimum-stability": "dev"
