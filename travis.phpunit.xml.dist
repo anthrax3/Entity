@@ -9,7 +9,8 @@
          convertWarningsToExceptions="true"
          colors="false"
          forceCoversAnnotation="false"
-         processIsolation="false">
+         processIsolation="false"
+         bootstrap="tests/bootstrap.php">
 
   <!-- Test suites to be run -->
   <testsuites>
