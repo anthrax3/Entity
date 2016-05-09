@@ -59,6 +59,16 @@ class AddressTest extends AbstractTest
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o id do bairro.
+     */
+    public function testSetSuburbIdNull()
+    {
+        $this->instance->setSuburbId(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o bairro.
      */
     public function testSetSuburbNull()
@@ -69,7 +79,17 @@ class AddressTest extends AbstractTest
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
-     * @expectedExceptionMessage Você deve informar o cidade.
+     * @expectedExceptionMessage Você deve informar o id da cidade.
+     */
+    public function testSetCityIdNull()
+    {
+        $this->instance->setCityId(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar a cidade.
      */
     public function testSetCityNull()
     {
@@ -89,11 +109,31 @@ class AddressTest extends AbstractTest
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o id do estado.
+     */
+    public function testSetZoneIdNull()
+    {
+        $this->instance->setZoneId(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o estado.
      */
     public function testSetZoneNull()
     {
         $this->instance->setZone(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o id do país.
+     */
+    public function testSetCountryIdNull()
+    {
+        $this->instance->setCountryId(null);
     }
 
     /**
@@ -114,20 +154,28 @@ class AddressTest extends AbstractTest
         $this->instance->setStreet('Street 1')
                        ->setNumber('Number 1')
                        ->setComplement('Complement 1')
+                       ->setSuburbId(55)
                        ->setSuburb('Suburb 1')
+                       ->setCityId(66)
                        ->setCity('City 1')
                        ->setZoneCode('99099000')
+                       ->setZoneId(77)
                        ->setZone('Zone 1')
+                       ->setCountryId(88)
                        ->setCountry('Country 1');
 
         $this->assertEquals($this->instance->getStreet(), 'Street 1');
         $this->assertEquals($this->instance->getNumber(), 'Number 1');
         $this->assertEquals($this->instance->getComplement(), 'Complement 1');
+        $this->assertEquals($this->instance->getSuburbId(), 55);
         $this->assertEquals($this->instance->getSuburb(), 'Suburb 1');
+        $this->assertEquals($this->instance->getCityId(), 66);
         $this->assertEquals($this->instance->getCity(), 'City 1');
         $this->assertEquals($this->instance->getZoneCode(), '99099000');
         $this->assertEquals($this->instance->setMask(true)->getZoneCode(), '99099-000');
+        $this->assertEquals($this->instance->getZoneId(), 77);
         $this->assertEquals($this->instance->getZone(), 'Zone 1');
+        $this->assertEquals($this->instance->getCountryId(), 88);
         $this->assertEquals($this->instance->getCountry(), 'Country 1');
     }
 }

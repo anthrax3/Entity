@@ -17,10 +17,14 @@ abstract class AbstractAddress implements AddressInterface
     protected $street;
     protected $number;
     protected $complement;
+    protected $suburbId;
     protected $suburb;
+    protected $cityId;
     protected $city;
     protected $zoneCode;
+    protected $zoneId;
     protected $zone;
+    protected $countryId;
     protected $country;
 
     /**
@@ -83,6 +87,19 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Registra o id do bairro
+     * @param string $suburbId
+     */
+    public function setSuburbId($suburbId = null)
+    {
+        if (is_null($suburbId)) {
+            throw new Argument("Você deve informar o id do bairro.");
+        }
+        $this->suburbId = $suburbId;
+        return $this;
+    }
+
+    /**
      * Registra o bairro do endereço
      * @param string $suburb
      */
@@ -96,13 +113,26 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Registra o id da cidade
+     * @param string $cityId
+     */
+    public function setCityId($cityId = null)
+    {
+        if (is_null($cityId)) {
+            throw new Argument("Você deve informar o id da cidade.");
+        }
+        $this->cityId = $cityId;
+        return $this;
+    }
+
+    /**
      * Registra a cidade do endereço
      * @param string $city
      */
     public function setCity($city = null)
     {
         if (is_null($city)) {
-            throw new Argument("Você deve informar o cidade.");
+            throw new Argument("Você deve informar a cidade.");
         }
         $this->city = $city;
         return $this;
@@ -122,6 +152,19 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Registra o id do estado
+     * @param string $zoneId
+     */
+    public function setZoneId($zoneId = null)
+    {
+        if (is_null($zoneId)) {
+            throw new Argument("Você deve informar o id do estado.");
+        }
+        $this->zoneId = $zoneId;
+        return $this;
+    }
+
+    /**
      * Registra o estado do endereço
      * @param string $zone
      */
@@ -135,8 +178,21 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Registra o id do país
+     * @param string $countryId
+     */
+    public function setCountryId($countryId = null)
+    {
+        if (is_null($countryId)) {
+            throw new Argument("Você deve informar o id do país.");
+        }
+        $this->countryId = $countryId;
+        return $this;
+    }
+
+    /**
      * Registra o país do endereço
-     * @param string $zone
+     * @param string $country
      */
     public function setCountry($country = null)
     {
@@ -193,12 +249,30 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Recupera o id do bairro
+     * @return integer
+     */
+    public function getSuburbId()
+    {
+        return $this->suburbId;
+    }
+
+    /**
      * Recupera o bairro do endereço
      * @return string
      */
     public function getSuburb()
     {
         return $this->suburb;
+    }
+
+    /**
+     * Recupera o id cidade
+     * @return integer
+     */
+    public function getCityId()
+    {
+        return $this->cityId;
     }
 
     /**
@@ -220,12 +294,30 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Recupera o id do estado
+     * @return integer
+     */
+    public function getZoneId()
+    {
+        return $this->zoneId;
+    }
+
+    /**
      * Recupera o estado do endereço
      * @return string
      */
     public function getZone()
     {
         return $this->zone;
+    }
+
+    /**
+     * Recupera o id do país
+     * @return integer
+     */
+    public function getCountryId()
+    {
+        return $this->countryId;
     }
 
     /**

@@ -16,9 +16,11 @@ class Number extends Container
 
     public function __construct($type = null, $number = null)
     {
-        $this->setMask(false)
-             ->setType($type)
-             ->setNumber($number);
+        if (!empty($type) && !empty($number)) {
+            $this->setMask(false)
+                 ->setType($type)
+                 ->setNumber($number);
+        }
     }
 
     /**

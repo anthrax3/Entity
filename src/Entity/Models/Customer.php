@@ -1,9 +1,4 @@
-<?php
-
-namespace models;
-
-use lib\Core;
-use PDO;
+<?php namespace Entity\Models;
 
 class Customer
 {
@@ -29,7 +24,7 @@ class Customer
 
     public function __construct()
     {
-        $this->core = Core::getInstance();
+        $this->core = DB::getInstance();
         $this->table = 'customer';
         $this->tablePerson = 'customer_person';
         $this->tablePersonJuridical = 'customer_person_juridical';

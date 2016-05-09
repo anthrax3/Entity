@@ -1,6 +1,7 @@
 <?php namespace Entity\Person;
 
 use Entity\Person\AbstractPerson;
+use \UnexpectedValueException as Argument;
 
 /**
  * Classe para criação da entidade Pessoa Juridica

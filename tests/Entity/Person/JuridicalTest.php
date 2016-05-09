@@ -65,12 +65,62 @@ class JuridicalTest extends AbstractTest
     }
 
     /**
+    * @depends testInstantiationWithoutArgumentsShouldWork
+    * @expectedException UnexpectedValueException
+    * @expectedExceptionMessage Você deve informar o tipo de pessoa.
+    */
+    public function testSetTypeNull()
+    {
+        $this->instance->setType(null);
+    }
+
+    /**
      * @depends testInstantiationWithoutArgumentsShouldWork
      */
     public function testGetMask()
     {
         $mask = $this->instance->getMask();
         $this->assertFalse($mask);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar a razão social.
+     */
+    public function testSetCorporateNameNull()
+    {
+        $this->instance->setCorporateName(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o nome fantasía.
+     */
+    public function testSetTradingNameNull()
+    {
+        $this->instance->setTradingName(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     */
+    public function testGetCorporateName()
+    {
+        $this->instance->setCorporateName('Corporate Name');
+        $corporateName = $this->instance->getCorporateName();
+        $this->assertEquals($corporateName, 'Corporate Name');
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     */
+    public function testGetTradingName()
+    {
+        $this->instance->setTradingName('Tranding Name');
+        $tradingName = $this->instance->getTradingName();
+        $this->assertEquals($tradingName, 'Tranding Name');
     }
 
     /**
@@ -95,6 +145,15 @@ class JuridicalTest extends AbstractTest
     }
 
     /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o tamanho do documento principal.
+     */
+    public function testSetWithInvalidPrimaryLengthDocShouldThrownAnException()
+    {
+        $this->instance->setPrimaryDocLength(null);
+    }
+
+    /**
      * @expectedException SecundaryDocInvalidException
      * @expectedExceptionMessage Documento principal inv&aacute;lido.
      */
@@ -102,5 +161,14 @@ class JuridicalTest extends AbstractTest
     {
         $this->setExpectedException('\Entity\Person\Exceptions\SecundaryDocInvalidException');
         $this->instance->setSecundaryDoc( '1234567890' );
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o tamanho do documento secundário.
+     */
+    public function testSetWithInvalidSecundaryLengthDocShouldThrownAnException()
+    {
+        $this->instance->setSecundaryDocLength(null);
     }
 }
