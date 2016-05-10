@@ -5,7 +5,7 @@
 
   <!-- Test suites to be run -->
   <testsuites>
-    <testsuite name="Entity Tests">
+    <testsuite name="Entity Tests Coverage">
       <directory suffix="Test.php">tests</directory>
     </testsuite>
   </testsuites>

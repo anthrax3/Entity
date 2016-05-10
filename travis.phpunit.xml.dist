@@ -14,7 +14,7 @@
 
   <!-- Test suites to be run -->
   <testsuites>
-    <testsuite name="Entity Tests">
+    <testsuite name="Entity Tests Travis">
       <directory>./tests/</directory>
     </testsuite>
   </testsuites>
@@ -34,7 +34,7 @@
   <!-- Logging -->
   <logging>
       <log type="coverage-clover" target="tests/coverage/clover.xml" />
-      <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
+      <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
       <log type="junit" target="tests/coverage/junit.xml" logIncompleteSkipped="false"/>
   </logging>
 

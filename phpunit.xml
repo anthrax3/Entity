@@ -13,7 +13,7 @@
 
   <!-- Test suites to be run -->
   <testsuites>
-    <testsuite name="restler">
+    <testsuite name="Entity Tests">
       <directory suffix="Test.php">tests</directory>
     </testsuite>
   </testsuites>
