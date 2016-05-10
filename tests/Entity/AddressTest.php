@@ -59,11 +59,31 @@ class AddressTest extends AbstractTest
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o id do numero.
+     */
+    public function testSetNumberIdNull()
+    {
+        $this->instance->setNumberId(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o numero.
      */
     public function testSetNumberNull()
     {
         $this->instance->setNumber(null);
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o id do complemento.
+     */
+    public function testSetComplementIdNull()
+    {
+        $this->instance->setComplementId(null);
     }
 
     /**
@@ -174,7 +194,9 @@ class AddressTest extends AbstractTest
         $this->instance->setId(123)
                        ->setType('Type 1')
                        ->setStreet('Street 1')
+                       ->setNumberId(321)
                        ->setNumber('Number 1')
+                       ->setComplementId(213)
                        ->setComplement('Complement 1')
                        ->setSuburbId(55)
                        ->setSuburb('Suburb 1')
@@ -190,7 +212,9 @@ class AddressTest extends AbstractTest
         $this->assertEquals($this->instance->getType(), 'Type 1');
         $this->assertEquals($this->instance->getStreet(), 'Street 1');
         $this->assertEquals($this->instance->getNumber(), 'Number 1');
+        $this->assertEquals($this->instance->getNumberId(), 321);
         $this->assertEquals($this->instance->getComplement(), 'Complement 1');
+        $this->assertEquals($this->instance->getComplementId(), 213);
         $this->assertEquals($this->instance->getSuburbId(), 55);
         $this->assertEquals($this->instance->getSuburb(), 'Suburb 1');
         $this->assertEquals($this->instance->getCityId(), 66);

@@ -12,7 +12,9 @@ interface AddressInterface
     public function setId($id = null);
     public function setType($type = null);
     public function setStreet($street = null);
+    public function setNumberId($numberId = null);
     public function setNumber($number = null);
+    public function setComplementId($complementId = null);
     public function setComplement($complement = null);
     public function setSuburbId($suburbId = null);
     public function setSuburb($suburb = null);
@@ -27,7 +29,9 @@ interface AddressInterface
     public function getId();
     public function getType();
     public function getStreet();
+    public function getNumberId();
     public function getNumber();
+    public function getComplementId();
     public function getComplement();
     public function getSuburbId();
     public function getSuburb();

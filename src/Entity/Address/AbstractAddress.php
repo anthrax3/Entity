@@ -15,7 +15,9 @@ abstract class AbstractAddress implements AddressInterface
     protected $mask;
     protected $type;
     protected $street;
+    protected $numberId;
     protected $number;
+    protected $complementId;
     protected $complement;
     protected $suburbId;
     protected $suburb;
@@ -81,6 +83,20 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Registra o id do numero
+     * @param string $numberId
+     * @return Address
+     */
+    public function setNumberId($numberId = null)
+    {
+        if (is_null($numberId)) {
+            throw new Argument("Você deve informar o id do numero.");
+        }
+        $this->numberId = $numberId;
+        return $this;
+    }
+
+    /**
      * Registra o numero do endereço
      * @param string $number
      * @return Address
@@ -91,6 +107,20 @@ abstract class AbstractAddress implements AddressInterface
             throw new Argument("Você deve informar o numero.");
         }
         $this->number = $number;
+        return $this;
+    }
+
+    /**
+     * Registra o id do complemento
+     * @param string $complementId
+     * @return Address
+     */
+    public function setComplementId($complementId = null)
+    {
+        if (is_null($complementId)) {
+            throw new Argument("Você deve informar o id do complemento.");
+        }
+        $this->complementId = $complementId;
         return $this;
     }
 
@@ -271,12 +301,30 @@ abstract class AbstractAddress implements AddressInterface
     }
 
     /**
+     * Recupera o id do numero
+     * @return integer
+     */
+    public function getNumberId()
+    {
+        return $this->numberId;
+    }
+
+    /**
      * Recupera o numero do endereço
      * @return string
      */
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * Recupera o id do complemento
+     * @return integer
+     */
+    public function getComplementId()
+    {
+        return $this->complementId;
     }
 
     /**
