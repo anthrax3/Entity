@@ -80,9 +80,14 @@ class Number extends Container
         }
         $number = $this["{$type}"];
         if ($this->mask) {
-            return preg_replace('/^([\d]{2})([\d]{4}[\d]?)([\d]{4})$/', '(${1})${2}-${3}', $number);
+            return $this->mask($number);
         }
         return $number;
+    }
+
+    public function mask($number = null)
+    {
+        return preg_replace('/^([\d]{2})([\d]{4}[\d]?)([\d]{4})$/', '(${1})${2}-${3}', $number);
     }
 
     /**

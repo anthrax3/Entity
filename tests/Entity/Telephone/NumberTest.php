@@ -85,8 +85,9 @@ class NumberTest extends AbstractTest
         $this->assertEquals( $this->instance->setMask(true)->getNumber('number2') , '(54)99999-1234' );
         $this->assertEquals( $this->instance->number2, '54999991234' );
 
+        $numbers = $this->instance->getNumbers();
         $this->assertEquals(
-            $this->instance->getNumbers(),
+            $numbers,
             array(
                 'type' => '00000000',
                 'number1' => '5499991234',
@@ -96,5 +97,9 @@ class NumberTest extends AbstractTest
 
         $this->instance->number2 = '54999981234';
         $this->assertEquals( $this->instance->setMask(false)->getNumber('number2') , 54999981234 );
+
+        $this->assertEquals($this->instance->mask($numbers['type']), '00000000');
+        $this->assertEquals($this->instance->mask($numbers['number1']), '(54)9999-1234');
+        $this->assertEquals($this->instance->mask($numbers['number2']), '(54)99999-1234');
     }
 }
