@@ -3,6 +3,8 @@
 ### Entidade Pessoa, Endereço e Telefone.
 
 [![Build Status](https://travis-ci.org/rbarros/Entity.svg?branch=master)](https://travis-ci.org/rbarros/Entity)
+[![Code Climate](https://codeclimate.com/github/rbarros/Entity/badges/gpa.svg)](https://codeclimate.com/github/rbarros/Entity)
+[![Test Coverage](https://codeclimate.com/github/rbarros/Entity/badges/coverage.svg)](https://codeclimate.com/github/rbarros/Entity/coverage)
 
 Você pode instalar com Composer (recomendado) ou manualmente.
 
