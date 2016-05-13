@@ -28,6 +28,14 @@ class EmailTest extends AbstractTest
 
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
+     */
+    public function testGetType()
+    {
+        $this->assertEquals($this->instance->getType(), 'email1');
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o tipo do email.
      */

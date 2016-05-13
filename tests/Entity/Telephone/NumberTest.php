@@ -28,6 +28,14 @@ class NumberTest extends AbstractTest
 
     /**
      * @depends testInstantiationWithoutArgumentsShouldWork
+     */
+    public function testGetType()
+    {
+        $this->assertEquals($this->instance->getType(), 'type');
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o tipo de telefone.
      */

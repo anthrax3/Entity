@@ -100,13 +100,13 @@ class Juridical extends AbstractPerson
         }
         $soma = $soma % 11;
 
-
         if ($soma == 0 || $soma == 1) {
             $digitoUm=0;
         } else {
             $digitoUm = 11 - $soma;
         }
 
+        $validate = false;
         if ((int)$digitoUm == (int)$primaryDoc{12}) {
             $soma = 0;
 
@@ -125,9 +125,9 @@ class Juridical extends AbstractPerson
                 $digitoDois = 11 - $soma;
             }
             if ($digitoDois == $primaryDoc{13}) {
-                return true;
+                $validate = true;
             }
         }
-        return false;
+        return $validate;
     }
 }

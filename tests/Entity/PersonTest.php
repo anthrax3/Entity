@@ -31,6 +31,16 @@ class PersonTest extends AbstractTest
     }
 
     /**
+     * expectedException Exception
+     * expectedExceptionMessage Tipo e pessoa não definido.
+     */
+    public function testGetTypeThrownAnException()
+    {
+        $instance = new Entity\Person('0');
+        $instance->getType();
+    }
+
+    /**
      * @expectedException UnexpectedValueException
      * @expectedExceptionMessage Você deve informar o primeiro nome.
      */
