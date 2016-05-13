@@ -3,7 +3,7 @@ language: php
 cache:
   directories:
     - $HOME/.composer/cache
-    
+
 sudo: false
 
 php:
@@ -12,10 +12,10 @@ php:
   - 5.5
   - 5.4
   - 5.3
-  
+
 before_script:
   - composer self-update
   - composer install
 
 script:
-  - phpunit --configuration travis.phpunit.xml.dist --colors=auto
+  - vendor/phpunit/phpunit --configuration travis.phpunit.xml.dist --colors=auto
