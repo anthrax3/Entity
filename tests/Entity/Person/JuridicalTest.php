@@ -65,10 +65,10 @@ class JuridicalTest extends AbstractTest
     }
 
     /**
-    * @depends testInstantiationWithoutArgumentsShouldWork
-    * @expectedException UnexpectedValueException
-    * @expectedExceptionMessage Você deve informar o tipo de pessoa.
-    */
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage Você deve informar o tipo de pessoa.
+     */
     public function testSetTypeNull()
     {
         $this->instance->setType(null);
@@ -145,39 +145,60 @@ class JuridicalTest extends AbstractTest
     }
 
     /**
-    * @depends testInstantiationWithoutArgumentsShouldWork
-    * @expectedException PrimaryDocInvalidException
-    * @expectedExceptionMessage Documento principal inv&aacute;lido.
-    */
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException PrimaryDocInvalidException
+     * @expectedExceptionMessage Documento principal inv&aacute;lido.
+     */
     public function testSetWithInvalidPrimaryDocEqualDigits()
     {
         $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
         $this->instance->setPrimaryDocLength(14)
-                       ->setPrimaryDoc('11111111111111');
+                       ->setPrimaryDoc('11.111.111/1111-11');
     }
 
     /**
-    * @depends testInstantiationWithoutArgumentsShouldWork
-    * @expectedException PrimaryDocInvalidException
-    * @expectedExceptionMessage Documento principal inv&aacute;lido.
-    */
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException PrimaryDocInvalidException
+     * @expectedExceptionMessage Documento principal inv&aacute;lido.
+     */
     public function testSetWithInvalidPrimaryDocNoneDigit()
     {
         $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
         $this->instance->setPrimaryDocLength(14)
-                       ->setPrimaryDoc('11111111111121');
+                       ->setPrimaryDoc('11.111.111/1111-21');
     }
 
     /**
-    * @depends testInstantiationWithoutArgumentsShouldWork
-    * @expectedException PrimaryDocInvalidException
-    * @expectedExceptionMessage Documento principal inv&aacute;lido.
-    */
-    public function testSetWithInvalidPrimaryDocTenDigit()
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException PrimaryDocInvalidException
+     * @expectedExceptionMessage Documento principal inv&aacute;lido.
+     */
+    public function testSetWithInvalidPrimaryDocOneDigit()
     {
         $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
         $this->instance->setPrimaryDocLength(14)
-                       ->setPrimaryDoc('11111111111112');
+                       ->setPrimaryDoc('11.111.111/1111-12');
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     * @expectedException PrimaryDocInvalidException
+     * @expectedExceptionMessage Documento principal inv&aacute;lido.
+     */
+    public function testSetWithInvalidPrimaryDocTwoDigit()
+    {
+        $this->setExpectedException('\Entity\Person\Exceptions\PrimaryDocInvalidException');
+        $this->instance->setPrimaryDocLength(14)
+                       ->setPrimaryDoc('11.111.111/1111-22');
+    }
+
+    /**
+     * @depends testInstantiationWithoutArgumentsShouldWork
+     */
+    public function testSetWithValidPrimaryDocTwoDigit()
+    {
+        $this->instance->setPrimaryDocLength(14)
+                       ->setPrimaryDoc('63.146.670/0001-30');
     }
 
     /**

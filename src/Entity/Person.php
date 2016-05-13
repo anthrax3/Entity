@@ -125,12 +125,16 @@ class Person
 
     public function getType()
     {
-        if ($this->type == 1) {
-            $type = 'natural';
-        } else if ($this->type == 2) {
-            $type = 'juridical';
-        } else {
-            throw new Exception('Tipo e pessoa não definido.');
+        try {
+            if ($this->type == 1) {
+                $type = 'natural';
+            } else if ($this->type == 2) {
+                $type = 'juridical';
+            } else {
+                throw new Exception('Tipo e pessoa não definido.');
+            }
+        } catch (Exception $e) {
+            $type = false;
         }
         return $type;
     }

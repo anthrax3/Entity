@@ -24,6 +24,9 @@
       <whitelist>
         <directory>./</directory>
         <exclude>
+          <directory>./src/Entity/Models/</directory>
+          <file>./src/Entity/DB.php</file>
+          <file>./src/Entity/MySQL.php</file>
           <directory>./public</directory>
           <directory>./tests</directory>
           <directory>./vendor</directory>
