@@ -15,11 +15,11 @@ $ php composer.phar install --prefer-source
 Tests sem Coverage
 
 ```
-$ bin/phpunit --configuration phpunit.xml
+$ vendor/bin/phpunit --configuration phpunit.xml
 ```
 Tests com coverage
 ```
-$ bin/phpunit --configuration phpunit.xml.dist
+$ vendor/bin/phpunit --configuration phpunit.xml.dist
 ```
 
 # Todo
