@@ -85,6 +85,7 @@ class NumberTest extends AbstractTest
         $this->assertEquals( $this->instance->getNumber('number1') , 5499991234 );
         $this->assertEquals( $this->instance->setMask(true)->getNumber('number1') , '(54)9999-1234' );
         $this->assertEquals( $this->instance->number1, '5499991234' );
+        $this->assertEquals( $this->instance->getNumber('number2') , null );
 
         // Nono digito
         $this->instance

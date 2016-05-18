@@ -55,7 +55,7 @@ class Number extends Container
         if (is_null($number)) {
             throw new Argument("Você deve informar o numero.");
         }
-        $this->instance("{$this->type}", $this->onlynumber($number));
+        $this->instance($this->type, $this->onlynumber($number));
         return $this;
     }
 
@@ -78,7 +78,7 @@ class Number extends Container
         if (is_null($type)) {
             throw new Argument("Antes você deve informar um tipo");
         }
-        $number = $this["{$type}"];
+        $number = !empty($this->instances[$type]) ? $this->instances[$type] : null;
         if ($this->mask) {
             return $this->mask($number);
         }
@@ -117,7 +117,7 @@ class Number extends Container
      */
     public function __get($key)
     {
-        return $this[$key];
+        return $this->instances[$key];
     }
 
     /**
@@ -129,6 +129,6 @@ class Number extends Container
      */
     public function __set($key, $value)
     {
-        $this[$key] = $value;
+         $this->instance($key, $this->onlynumber($value));
     }
 }
