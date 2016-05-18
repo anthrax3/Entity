@@ -74,6 +74,7 @@ class EmailTest extends AbstractTest
              ->setAddress('admin@admin.com.br');
         $this->assertEquals( $this->instance->getAddress('email2') , 'admin@admin.com.br');
         $this->assertEquals( $this->instance->email2, 'admin@admin.com.br' );
+        $this->assertEquals( $this->instance->getAddress('email3') , null);
 
         $this->assertEquals(
             $this->instance->getAddresses(),

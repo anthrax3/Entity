@@ -43,7 +43,7 @@ class Email extends Container
         if (is_null($address)) {
             throw new Argument("Você deve informar endereço do email.");
         }
-        $this->instance("{$this->type}", $address);
+        $this->instance($this->type, $address);
         return $this;
     }
 
@@ -66,7 +66,7 @@ class Email extends Container
         if (is_null($type)) {
             throw new Argument("Antes você deve informar um tipo.");
         }
-        $address = $this["{$type}"];
+        $address = !empty($this->instances[$type]) ? $this->instances[$type] : null;
         return $address;
     }
 
@@ -87,7 +87,7 @@ class Email extends Container
      */
     public function __get($key)
     {
-        return $this[$key];
+        return $this->instances[$key];
     }
 
     /**
@@ -99,6 +99,6 @@ class Email extends Container
      */
     public function __set($key, $value)
     {
-        $this[$key] = $value;
+        $this->instance($key, $value);
     }
 }
