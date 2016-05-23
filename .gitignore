@@ -28,6 +28,10 @@ dwsync.xml
 *.komodoproject
 .komodotools
 
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
 # Folders to ignore
 .hg
 .svn
@@ -39,3 +43,16 @@ vendor/*
 /vendor
 /compiler/vendor
 /tests/coverage/
+/build/
+
+# Composer
+composer.phar
+composer.lock
+/vendor/
+/bin/
+
+# Node
+/node_modules/
+
+# Gitlist
+/gitlist/
