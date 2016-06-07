@@ -69,6 +69,12 @@ $address->setStreet('Street 1')
 
 ## Release History
 
+* **v1.5.0** - 2016-06-07
+   - Update php version 5.4 version illuminate/container:4.2.
+
+* **v1.4.0** - 2016-06-07
+   - Update version illuminate/container:4.1.
+
 * **v1.3.5** - 2016-05-18
    - Fix bug Telephone and Email instances null.
 
