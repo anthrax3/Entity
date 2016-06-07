@@ -1,9 +1,9 @@
-# Entity
+# Entity - v1.5.0
 
 ### Entidade Pessoa, Endereço e Telefone.
 
 ![GPL](https://img.shields.io/badge/license-GPLv3-lightgrey.svg?style=flat-square)
-![PHP](https://img.shields.io/badge/language-PHP%20%3E%3D%205.3-green.svg)
+![PHP](https://img.shields.io/badge/language-PHP%20%3E%3D%205.4-green.svg)
 ![MySQL](https://img.shields.io/badge/DB-MySQL-blue.svg?style=flat-square)
 [![Build Status](https://travis-ci.org/rbarros/Entity.svg?branch=master)](https://travis-ci.org/rbarros/Entity)
 [![Code Climate](https://codeclimate.com/github/rbarros/Entity/badges/gpa.svg)](https://codeclimate.com/github/rbarros/Entity)
